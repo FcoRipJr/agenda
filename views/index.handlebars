@@ -1,0 +1,22 @@
+<a href="/novo" class="btn btn-primary">Novo Registro</a>
+
+<table class="table table-striped table-hover">
+    <tr>
+        <th>Ações</th>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Número</th>
+    </tr>
+    {{# each contatos }}
+        <tr>
+            <td>
+                <a href="/editar/{{ this.id }}" class="btn btn-warning">Editar</a>
+                <a href="/excluir/{{ this.id }}" class="btn btn-danger">Excluir</a>
+            </td>
+            <td>{{ this.id }}</td>
+            <td>{{ this.nome }}</td>
+            <td>{{ this.numero }}</td>
+        </tr>
+    {{/ each}}
+</table>
+
