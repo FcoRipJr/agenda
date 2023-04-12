@@ -1,49 +1,45 @@
-var contatos = [
-    { id: 1, nome: 'Adéliton', numero: 999999999 },
-    { id: 2, nome: 'João', numero: 88888888 },
-    { id: 3, nome: 'Maria', numero: 777777777 }
-]
+// var contatos = [
+//     { id: 1, nome: 'Adéliton', numero: 999999999 },
+//     { id: 2, nome: 'João', numero: 88888888 },
+//     { id: 3, nome: 'Maria', numero: 777777777 }
+// ]
+
+const { contatos } = require("../models/")
 
 class ContatosController {
-    static index(req, res) {
-        res.json(contatos)
+    static async index(req, res) {
+        const list = await contatos.findAll()
+        res.json(list)
     }
 
-    static salvarNovo(req, res) {
+    static async salvarNovo(req, res) {
         const { nome, numero } = req.body
-        var contato = {
-            id: contatos.length + 1,
-            nome: nome,
+        const contato = await contatos.create(
+         { nome: nome,
             numero: numero
-        }
-        contatos.push(contato)
+        })
 
         res.json(contato)
     }
 
-    static excluir(req, res) {
+    static async excluir(req, res) {
         const { id } = req.params
-        contatos = contatos.filter((contato) => {
-            return contato.id != id
-        })
-        res.json(true)
-
+        const contato = await contatos.destroy({
+            where: {
+              id: id
+            }
+          })
+        res.json(contato)
     }
 
-    static salvarEditar(req, res) {
+    static async salvarEditar(req, res) {
         const { id } = req.params
         const { nome, numero } = req.body
 
-        const index = contatos.findIndex((contato) => {
-            return contato.id == id
-        })
-        let contato = {
-            id: id,
-            nome: nome,
-            numero: numero
-        }
-        contatos[index] = contato
-
+        const contato = await contatos.update(
+            { nome: nome, numero: numero },
+            { where: { id: id } }
+        )
         res.json(contato)
 
     }
