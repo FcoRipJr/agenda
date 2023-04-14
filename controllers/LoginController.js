@@ -5,22 +5,22 @@ class LoginController {
     static async makeLogin(req, res) {
         const { email, senha } = req.body
 
-        const usuarioObj = await usuarios.findAll(
+        const usuarioObj = await usuarios.findOne(
             { where: { email: email, status:'A' } }
         )
-        // const usuario = await usuarios.findByPk(id)
-        // usuario.update(
-        //     { nome: nome, email: email, senha:senha, data_nascimento:data_nascimento, status:status }
-        // )
-        // res.json(usuario)
-        if(!usuarioObj.length) {
+        if(!usuarioObj) {
             res.status(401).json({
                 error: 'Usuário ou senha inválido'
             }).end()
         } else {
-
-            res.json(usuarioObj)
-
+            const sucesso = await bcrypt.compare(senha, usuarioObj.senha)
+            if(sucesso){
+                res.json(usuarioObj)
+            } else {
+                res.status(401).json({
+                    error: 'Usuário ou senha inválido'
+                }).end()
+            }
         }
 
 
