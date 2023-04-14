@@ -1,9 +1,3 @@
-// var contatos = [
-//     { id: 1, nome: 'Adéliton', numero: 999999999 },
-//     { id: 2, nome: 'João', numero: 88888888 },
-//     { id: 3, nome: 'Maria', numero: 777777777 }
-// ]
-
 const { contatos } = require("../models/")
 
 class ContatosController {

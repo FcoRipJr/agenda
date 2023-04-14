@@ -1,9 +1,3 @@
-// var Filmes = [
-//     { id: 1, titulo: 'Adéliton', duracao: 999999999 },
-//     { id: 2, titulo: 'João', duracao: 88888888 },
-//     { id: 3, titulo: 'Maria', duracao: 777777777 }
-// ]
-
 const { filmes } = require("../models/")
 
 class FilmesController {
