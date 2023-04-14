@@ -1,5 +1,6 @@
 const { usuarios } = require("../models/")
 const bcrypt = require("bcrypt")
+const jwt = require('jsonwebtoken');
 
 class LoginController {
     static async makeLogin(req, res) {
@@ -15,7 +16,10 @@ class LoginController {
         } else {
             const sucesso = await bcrypt.compare(senha, usuarioObj.senha)
             if(sucesso){
-                res.json(usuarioObj)
+
+                const token = await jwt.sign(usuarioObj.id, '9i7yy6ts3');
+
+                res.json({token: token})
             } else {
                 res.status(401).json({
                     error: 'Usuário ou senha inválido'
