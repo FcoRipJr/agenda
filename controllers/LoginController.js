@@ -1,6 +1,7 @@
 const { usuarios } = require("../models/")
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken');
+require('dotenv').config()
 
 class LoginController {
     static async makeLogin(req, res) {
@@ -17,7 +18,7 @@ class LoginController {
             const sucesso = await bcrypt.compare(senha, usuarioObj.senha)
             if(sucesso){
 
-                const token = await jwt.sign(usuarioObj.id, '9i7yy6ts3');
+                const token = await jwt.sign(usuarioObj.id, process.env.JWT_KEY);
 
                 res.json({token: token})
             } else {
