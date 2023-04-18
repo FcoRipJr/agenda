@@ -35,7 +35,7 @@ class LoginController {
 
         jwt.verify(token, process.env.JWT_KEY, (error, success) => {
             if(!error){
-                console.log(success)
+                req.userId = success
                 next()
             } else {
                 res.status(401).json({
@@ -44,6 +44,13 @@ class LoginController {
             }
             
         })
+    }
+
+    static async user(req,res) {
+        const usuario = await usuarios.findByPk(req.userId,{
+            attributes: ['id', 'nome', 'email', 'data_nascimento']
+        })
+        res.json(usuario)
     }
 }
 

@@ -23,5 +23,6 @@ router.put('/usuarios/novasenha/:id', UsuariosController.novaSenha)
 // router.get('/novo', ContatosController.novo)
 // router.get('/editar/:id', ContatosController.editar)
 router.post('/login', LoginController.makeLogin)
+router.get('/user', LoginController.validaToken, LoginController.user)
 
 module.exports = router
