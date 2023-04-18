@@ -28,7 +28,22 @@ class LoginController {
             }
         }
 
+    }
 
+    static validaToken(req,res, next) {
+        const token = req.headers["authorization"]
+
+        jwt.verify(token, process.env.JWT_KEY, (error, success) => {
+            if(!error){
+                console.log(success)
+                next()
+            } else {
+                res.status(401).json({
+                    error: 'Token inválido'
+                }).end()
+            }
+            
+        })
     }
 }
 

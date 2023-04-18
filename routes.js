@@ -5,7 +5,7 @@ const UsuariosController = require('./controllers/UsuariosController')
 const LoginController = require('./controllers/LoginController')
 const router = express.Router()
 
-router.get('/', ContatosController.index)
+router.get('/',LoginController.validaToken, ContatosController.index)
 router.post('/novo', ContatosController.salvarNovo)
 router.delete('/excluir/:id', ContatosController.excluir)
 router.put('/editar/:id', ContatosController.salvarEditar)
