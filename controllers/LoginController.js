@@ -1,4 +1,4 @@
-const { usuarios } = require("../models/")
+const { usuarios, pessoas, emails, generos } = require("../models/")
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken');
 require('dotenv').config()
@@ -51,6 +51,13 @@ class LoginController {
             attributes: ['id', 'nome', 'email', 'data_nascimento']
         })
         res.json(usuario)
+    }
+
+    static async pessoa(req,res) {
+        const pessoa = await pessoas.findByPk(1,{
+            include: 'emails'
+        })
+        res.json(pessoa)
     }
 }
 
