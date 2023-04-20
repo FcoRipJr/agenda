@@ -3,6 +3,7 @@ const ContatosController = require('./controllers/ContatosController')
 const FilmesController = require('./controllers/FilmesController')
 const UsuariosController = require('./controllers/UsuariosController')
 const LoginController = require('./controllers/LoginController')
+const EmailsController = require('./controllers/EmailsController')
 const router = express.Router()
 
 router.get('/',LoginController.validaToken, ContatosController.index)
@@ -25,5 +26,6 @@ router.put('/usuarios/novasenha/:id', UsuariosController.novaSenha)
 router.post('/login', LoginController.makeLogin)
 router.get('/user', LoginController.validaToken, LoginController.user)
 router.get('/pessoa',  LoginController.pessoa)
+router.get('/emails/:id',  EmailsController.index)
 
 module.exports = router

@@ -55,7 +55,7 @@ class LoginController {
 
     static async pessoa(req,res) {
         const pessoa = await pessoas.findByPk(1,{
-            include: 'emails'
+            include: ['emails', 'generos']
         })
         res.json(pessoa)
     }

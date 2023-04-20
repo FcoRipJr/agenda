@@ -16,9 +16,10 @@ module.exports = (sequelize, DataTypes) => {
       })
 
       this.belongsToMany(models.generos, {
-        through: 'pessoas_generos',
         as: 'generos',
-        foreignKey:'pessoas_id'
+        through: 'pessoas_generos',
+        foreignKey:'pessoas_id',
+        otherKey: 'generos_id'
       })
     }
   }
